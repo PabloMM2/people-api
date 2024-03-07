@@ -12,11 +12,11 @@ func Server(logger *zap.Logger) error {
 	r := chi.NewRouter()
 	r.Mount("/", Router(logger))
 
-	err := http.ListenAndServe(":80", r)
+	err := http.ListenAndServe(":3000", r)
 	if err != nil {
 		return err
 	} else {
-		fmt.Println("Server is running on PORT: 80")
+		fmt.Println("Server is running on PORT: 3000")
 	}
 
 	return nil
