@@ -2,21 +2,19 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"people-api/cmd/server"
 	db "people-api/internal/app/database"
 
-	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 )
 
 func main() {
 	//Dotenv
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+	//err := godotenv.Load(".env")
+	//if err != nil {
+	//	log.Fatalf("Error loading .env file")
+	//}
 
 	//Init logger
 	logger, err := zap.NewProduction()
