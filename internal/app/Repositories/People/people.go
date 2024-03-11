@@ -9,6 +9,7 @@ import (
 type PeopleRepo interface {
 	CreatePerson(person *models.Person) (*models.Person, error)
 	GetPerson(id *uint) (*models.Person, error)
+	GetPersonByEmail(email *string) (*models.Person, error)
 }
 
 type PeopleRepoImpl struct {
@@ -25,6 +26,18 @@ func (pr *PeopleRepoImpl) GetPerson(id *uint) (*models.Person, error) {
 	person := &models.Person{}
 
 	tx := pr.DB.Where("id = ?", *id).Find(&person)
+
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+
+	return person, nil
+}
+
+func (pr *PeopleRepoImpl) GetPersonByEmail(email *string) (*models.Person, error) {
+	person := &models.Person{}
+
+	tx := pr.DB.Where("email = ?", *email).Find(&person)
 
 	if tx.Error != nil {
 		return nil, tx.Error
